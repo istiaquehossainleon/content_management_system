@@ -1,5 +1,5 @@
 <?php
-        include "includes/dbConnection.php"; #Database Connection
+        include "includes/dbConnection.php";
 ?>
 
 <?php
@@ -21,22 +21,34 @@
 
             <!-- Blog Entries Column -->
             <div class="col-md-8">
-                
                 <?php
-                    $query = "SELECT * FROM posts";
-                    $select_all_posts_query = mysqli_query($connection, $query);
+                    if(isset($_POST['submit'])){
+                    $search = $_POST['search'];
                     
-                    while($row = mysqli_fetch_assoc($select_all_posts_query)){
+                    $query = "SELECT * FROM posts WHERE post_tags LIKE '%$search%'";
+                    $search_query = mysqli_query($connection, $query);
+                    
+                    if(!$search_query){
+                        die("QUERY FAILED" . mysqli_error($connection));
+                    }
+                    
+                    $count = mysqli_num_rows($search_query);
+                    
+                    if($count == 0){
+                        "<h1>No matches Found</h1>";
+                    }
+                    else{
+                    
+                    while($row = mysqli_fetch_assoc($search_query)){
                         $post_title = $row['post_title'];
                         $post_id = $row['post_id'];
                         $post_author = $row['post_author'];
                         $post_date = $row['post_date'];
                         $post_content = $row['post_content'];
                         $post_image = $row['post_image'];
-                        
-                        ?>
-                        
-                        <h1 class="page-header">
+                ?>
+                
+                    <h1 class="page-header">
                         Page Heading
                         <small>Secondary Text</small>
                         </h1>
@@ -56,8 +68,9 @@
                         <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                         <hr>
-                        
                     <?php
+                                }
+                            }
                         }
                     ?>
 
@@ -90,3 +103,4 @@
 <?php
         include "includes/footer.php";
 ?>
+                
