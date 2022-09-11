@@ -24,12 +24,17 @@
                             <small>Author</small>
                         </h1>
                         <ol class="breadcrumb">
-                            <li>
-                                <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-file"></i> Blank Page
-                            </li>
+                             <div class = "col-xs=6">
+                                 <form action="">
+                                     <div class="form-group">
+                                        <label for="cat-title">Add Category</label>
+                                         <input type="text" name = "cat_title" class="form-control">
+                                     </div>
+                                     <div class="form-group">
+                                         <input type="text" name = "submit" class = "btn btn-primary" value="Add Category">
+                                     </div>
+                                 </form>
+                             </div>
                         </ol>
                     </div>
                 </div>
